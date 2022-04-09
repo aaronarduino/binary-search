@@ -50,7 +50,7 @@ func binarySearch(arr []int, target int) int {
 	l := 0
 	r := len(arr) - 1
 
-	for {
+	for l < r {
 		i := r - l/2
 		if target < arr[i] {
 			r = i - 1
@@ -61,17 +61,12 @@ func binarySearch(arr []int, target int) int {
 		}
 	}
 
-	// Old code
-	//for i, num := range arr {
-	//	if num == target {
-	//		return i
-	//	}
-	//}
-
-	// New Code
 	return -1
 }
 
+// elapsed times the time it takes to run a func.
+// This is probably not the accurate way to time this,
+// however, it works for now.
 func elapsed(what string) func() {
 	start := time.Now()
 	return func() {

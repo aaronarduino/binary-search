@@ -22,14 +22,14 @@ func main() {
 		if lsResult < 0 {
 			fmt.Println("linearSearch could not find target in array.")
 		} else {
-			fmt.Printf("linearSearch found %d at index %d\n", target, lsResult)
+			fmt.Printf("linearSearch found %d at index %d: %d\n", target, lsResult, arr[lsResult])
 		}
 
 		bsResult := binarySearch(arr, target)
 		if bsResult < 0 {
 			fmt.Println("binarySearch could not find target in array.")
 		} else {
-			fmt.Printf("binarySearch %d found at index %d\n", target, bsResult)
+			fmt.Printf("binarySearch %d found at index %d: %d\n", target, bsResult, arr[bsResult])
 		}
 	}
 }

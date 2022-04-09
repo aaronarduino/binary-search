@@ -5,23 +5,47 @@ import (
 	"time"
 )
 
-var arr = []int{-2, 3, 4, 7, 8, 9, 11, 13}
+var arrs = [][]int{
+	{-2, 3, 4, 7, 8, 9, 11, 13},
+	{-20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
+}
+
+var targets = []int{11, 9}
 
 func main() {
-	target := 11
+	for i, arr := range arrs {
+		target := targets[i]
 
-	result := search(arr, target)
+		fmt.Println(fmt.Sprintf("Searching for %d:", target))
 
-	fmt.Println(fmt.Sprintf("Searching for %d:", target))
-	if result < 0 {
-		fmt.Println("Could not find target in array.")
-	} else {
-		fmt.Printf("%d found at index %d\n", target, result)
+		lsResult := linearSearch(arr, target)
+		if lsResult < 0 {
+			fmt.Println("linearSearch could not find target in array.")
+		} else {
+			fmt.Printf("linearSearch found %d at index %d\n", target, lsResult)
+		}
+
+		bsResult := binarySearch(arr, target)
+		if bsResult < 0 {
+			fmt.Println("binarySearch could not find target in array.")
+		} else {
+			fmt.Printf("binarySearch %d found at index %d\n", target, bsResult)
+		}
 	}
 }
 
-func search(arr []int, target int) int {
-	defer elapsed("search binary")()
+func linearSearch(arr []int, target int) int {
+	defer elapsed("linear search")()
+	for i, number := range arr {
+		if number == target {
+			return i
+		}
+	}
+	return -1
+}
+
+func binarySearch(arr []int, target int) int {
+	defer elapsed("binary search")()
 
 	l := 0
 	r := len(arr) - 1

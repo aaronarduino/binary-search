@@ -21,12 +21,30 @@ func main() {
 }
 
 func search(arr []int, target int) int {
-	defer elapsed("search")()
-	for i, num := range arr {
-		if num == target {
+	defer elapsed("search binary")()
+
+	l := 0
+	r := len(arr) - 1
+
+	for {
+		i := r - l/2
+		if target < arr[i] {
+			r = i - 1
+		} else if target > arr[i] {
+			l = i + 1
+		} else {
 			return i
 		}
 	}
+
+	// Old code
+	//for i, num := range arr {
+	//	if num == target {
+	//		return i
+	//	}
+	//}
+
+	// New Code
 	return -1
 }
 
